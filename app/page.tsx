@@ -22,35 +22,35 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* EL SECRETO ESTÁ AQUÍ: 'max-w-md mx-auto' obliga a la app a no ser gigante en PC */}
-      <main className="max-w-md mx-auto min-h-screen pb-96 border-x border-zinc-900 shadow-2xl relative">
+    <div style={{ backgroundColor: 'black', minHeight: '100vh', color: 'white', fontFamily: 'sans-serif' }}>
+      {/* CONTENEDOR CON ANCHO BLOQUEADO */}
+      <main style={{ maxWidth: '450px', margin: '0 auto', borderLeft: '1px solid #27272a', borderRight: '1px solid #27272a', paddingBottom: '350px' }}>
         
-        {/* HEADER: El div 'w-48 h-48' bloquea el tamaño del logo */}
-        <header className="text-center py-10 flex flex-col items-center border-b border-zinc-800 px-4">
-          <div className="w-48 h-48 relative mb-6">
+        {/* HEADER: LOGO ACHICADO A LA FUERZA */}
+        <header style={{ textAlign: 'center', padding: '40px 20px', borderBottom: '1px solid #27272a' }}>
+          <div style={{ width: '180px', height: '180px', margin: '0 auto 20px', borderRadius: '50%', overflow: 'hidden', border: '4px solid #ca8a04' }}>
             <img 
               src="/logo-grande.jpg" 
-              alt="Logo La Patrona" 
-              className="rounded-full border-4 border-yellow-600 object-cover w-full h-full shadow-2xl"
+              alt="Logo" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <h1 className="text-4xl font-black text-yellow-600 italic uppercase">La Patrona</h1>
-          <p className="text-[10px] text-zinc-500 uppercase tracking-[0.5em] mt-1">Licorería</p>
+          <h1 style={{ color: '#ca8a04', fontSize: '32px', margin: '0', textTransform: 'uppercase', fontStyle: 'italic' }}>La Patrona</h1>
+          <p style={{ color: '#71717a', fontSize: '10px', letterSpacing: '4px', margin: '5px 0 0' }}>LICORERÍA</p>
         </header>
 
-        {/* CATÁLOGO: 'grid-cols-2' para que las botellas no sean gigantes */}
-        <div className="grid grid-cols-2 gap-4 p-4">
+        {/* CATÁLOGO EN 2 COLUMNAS REALES */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', padding: '20px' }}>
           {licores.map((licor) => (
-            <div key={licor.id} className="bg-zinc-900/50 rounded-3xl p-4 border border-zinc-800 flex flex-col items-center">
-              <div className="h-40 w-full flex items-center justify-center mb-3">
-                <img src={licor.img} alt={licor.nombre} className="max-h-full object-contain" />
+            <div key={licor.id} style={{ background: '#18181b', borderRadius: '20px', padding: '15px', textAlign: 'center', border: '1px solid #27272a' }}>
+              <div style={{ height: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '10px' }}>
+                <img src={licor.img} alt={licor.nombre} style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} />
               </div>
-              <h3 className="text-[10px] font-bold text-center h-8 flex items-center leading-tight uppercase">{licor.nombre}</h3>
-              <p className="text-yellow-500 font-black text-sm my-2">${licor.precio.toFixed(2)}</p>
+              <h3 style={{ fontSize: '10px', margin: '5px 0', height: '30px' }}>{licor.nombre}</h3>
+              <p style={{ color: '#eab308', fontWeight: '900', margin: '5px 0' }}>${licor.precio.toFixed(2)}</p>
               <button 
-                onClick={() => agregarAlCarrito(licor.nombre, licores.find(l => l.nombre === licor.nombre)?.precio || 0)}
-                className="w-full bg-yellow-600 text-black font-black py-3 rounded-2xl text-[10px] uppercase active:scale-95 transition-all"
+                onClick={() => agregarAlCarrito(licor.nombre, licor.precio)}
+                style={{ width: '100%', background: '#ca8a04', border: 'none', padding: '10px', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', fontSize: '10px' }}
               >
                 + AGREGAR
               </button>
@@ -58,27 +58,25 @@ export default function Home() {
           ))}
         </div>
 
-        {/* FOOTER FIJO: Siempre centrado con el contenedor 'max-w-md' */}
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-zinc-950/95 backdrop-blur-xl border-t border-yellow-600/30 p-6 z-50">
-          <div className="space-y-4">
-            <div className="bg-zinc-900/80 p-3 rounded-xl border border-yellow-600/20 text-center">
-              <p className="text-[9px] text-yellow-500 font-bold uppercase tracking-widest">Banco de Loja - Jaime Cumbicos</p>
-              <p className="text-xs text-white font-mono">Ahorros: 0230142x00x</p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-2">
-              <input type="text" placeholder="Tu Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} className="bg-zinc-800 rounded-xl p-4 text-xs text-white outline-none focus:ring-1 focus:ring-yellow-600 w-full" />
-              <input type="text" placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} className="bg-zinc-800 rounded-xl p-4 text-xs text-white outline-none focus:ring-1 focus:ring-yellow-600 w-full" />
-            </div>
-
-            <div className="flex justify-between items-center bg-black/50 p-2 rounded-full border border-zinc-800">
-              <p className="text-3xl font-black text-yellow-500 pl-4">${total.toFixed(2)}</p>
-              <button onClick={enviarWhatsApp} className="bg-green-600 hover:bg-green-500 px-8 py-4 rounded-full font-black text-[11px] shadow-lg shadow-green-900/40">
-                PEDIR AHORA
-              </button>
-            </div>
-            <p className="text-center text-[8px] text-zinc-700 font-bold tracking-[0.4em] uppercase">Programmed by JAM</p>
+        {/* FOOTER SIEMPRE CENTRADO */}
+        <div style={{ position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: '450px', background: 'rgba(9, 9, 11, 0.95)', borderTop: '1px solid #ca8a0444', padding: '20px', boxSizing: 'border-box', zIndex: '100' }}>
+          <div style={{ background: '#18181b', padding: '10px', borderRadius: '15px', textAlign: 'center', marginBottom: '15px' }}>
+            <p style={{ fontSize: '9px', color: '#ca8a04', fontWeight: 'bold', margin: '0' }}>Banco de Loja - Jaime Cumbicos</p>
+            <p style={{ fontSize: '12px', color: 'white', margin: '5px 0' }}>Ahorros: 0230142x00x</p>
           </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '15px' }}>
+            <input type="text" placeholder="Tu Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} style={{ background: '#27272a', border: 'none', padding: '12px', borderRadius: '10px', color: 'white', fontSize: '12px' }} />
+            <input type="text" placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} style={{ background: '#27272a', border: 'none', padding: '12px', borderRadius: '10px', color: 'white', fontSize: '12px' }} />
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'center' }}>
+            <p style={{ fontSize: '24px', fontWeight: '900', color: '#eab308', margin: '0' }}>${total.toFixed(2)}</p>
+            <button onClick={enviarWhatsApp} style={{ background: '#16a34a', border: 'none', padding: '15px 30px', borderRadius: '50px', color: 'white', fontWeight: '900', fontSize: '10px', cursor: 'pointer' }}>
+              ENVIAR PEDIDO
+            </button>
+          </div>
+          <p style={{ textAlign: 'center', fontSize: '8px', color: '#3f3f46', marginTop: '15px', letterSpacing: '3px' }}>PROGRAMMED BY JAM</p>
         </div>
       </main>
     </div>
