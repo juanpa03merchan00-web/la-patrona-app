@@ -25,8 +25,7 @@ export default function Home() {
 
   return (
     <div style={{ backgroundColor: '#000', minHeight: '100vh', color: 'white', fontFamily: 'sans-serif' }}>
-      {/* CONTENEDOR MÓVIL Y WEB */}
-      <main style={{ maxWidth: '480px', margin: '0 auto', background: '#0a0a0a', minHeight: '100vh', paddingBottom: '450px', borderLeft: '1px solid #1a1a1a', borderRight: '1px solid #1a1a1a' }}>
+      <main style={{ maxWidth: '480px', margin: '0 auto', background: '#0a0a0a', minHeight: '100vh', paddingBottom: '400px', borderLeft: '1px solid #1a1a1a', borderRight: '1px solid #1a1a1a' }}>
         
         {/* HEADER */}
         <header style={{ textAlign: 'center', padding: '30px 20px' }}>
@@ -49,10 +48,10 @@ export default function Home() {
           ))}
         </div>
 
-        {/* FOOTER FIJO QUE NO TAPA LA NAVEGACIÓN */}
-        <footer style={{ position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: '480px', background: 'rgba(5, 5, 5, 0.98)', borderTop: '2px solid #ca8a04', padding: '15px', boxSizing: 'border-box', zIndex: '1000' }}>
+        {/* FOOTER FIJO CORREGIDO */}
+        <footer style={{ position: 'fixed', bottom: '0', left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: '480px', background: 'rgba(5, 5, 5, 0.98)', borderTop: '2px solid #ca8a04', padding: '15px', boxSizing: 'border-box', zIndex: '1000', boxShadow: '0 -10px 20px rgba(0,0,0,0.8)' }}>
           
-          <div style={{ background: 'rgba(202, 138, 4, 0.1)', border: '1px solid #ca8a0444', padding: '8px', borderRadius: '10px', marginBottom: '12px', textAlign: 'center' }}>
+          <div style={{ background: 'rgba(202, 138, 4, 0.1)', border: '1px solid #ca8a0444', padding: '8px', borderRadius: '10px', marginBottom: '10px', textAlign: 'center' }}>
             <p style={{ fontSize: '8px', color: '#ca8a04', fontWeight: 'bold', margin: '0' }}>BANCO DE LOJA - JAIME CUMBICOS</p>
             <p style={{ fontSize: '12px', color: '#fff', margin: '3px 0', fontWeight: 'bold' }}>Ahorros: 0230142x00x</p>
             <p style={{ fontSize: '7px', color: '#777', margin: '0' }}>*Solo con transferencia y comprobante verificado.</p>
@@ -71,7 +70,9 @@ export default function Home() {
               <p style={{ fontSize: '8px', color: '#666', margin: '0' }}>TOTAL</p>
               <p style={{ fontSize: '26px', fontWeight: '900', color: '#eab308', margin: '0' }}>${total.toFixed(2)}</p>
             </div>
-            <button onClick={enviarWhatsApp} style={{ background: '#16a34a', border: 'none', padding: '12px 20px', borderRadius: '50px', color: 'white', fontWeight: '900', fontSize: '11px', cursor: 'pointer' }}>PEDIR WHATSAPP</button>
+            <button onClick={enviarWhatsApp} style={{ background: '#16a34a', border: 'none', padding: '12px 20px', borderRadius: '50px', color: 'white', fontWeight: '900', fontSize: '11px', cursor: 'pointer', boxShadow: '0 4px 10px rgba(22,163,74,0.3)' }}>
+               REALIZAR PEDIDO
+            </button>
           </div>
           <p style={{ textAlign: 'center', fontSize: '8px', color: '#333', marginTop: '10px', letterSpacing: '3px' }}>PROGRAMMED BY JAM</p>
         </footer>
